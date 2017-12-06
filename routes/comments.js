@@ -1,3 +1,4 @@
+/* eslint no-param-reassign: 0 */
 const express = require('express');
 
 const Campground = require('../models/campground');
@@ -25,6 +26,9 @@ router.post('/', isLoggedIn, (req, res) => {
         if (error) {
           console.log(error);
         } else {
+          comment.author.id = req.user._id;
+          comment.author.username = req.user.username;
+          comment.save();
           campground.comments.push(comment);
           campground.save();
           res.redirect(`/campgrounds/${campground._id}`);

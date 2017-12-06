@@ -44,7 +44,7 @@ app.use(indexRoutes);
 app.use('/campgrounds', campgroundsRoutes);
 app.use('/campgrounds/:id/comments', commentsRoutes);
 
-seedDB();
+//seedDB();
 
 app.listen(3000, () => {
   console.log('YelpCamp running on port 3000.');
