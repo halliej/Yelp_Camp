@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
+const methodOverride = require('method-override');
 
 const User = require('./models/user');
 
@@ -12,7 +13,7 @@ const commentsRoutes = require('./routes/comments');
 const campgroundsRoutes = require('./routes/campgrounds');
 const indexRoutes = require('./routes/index');
 
-const seedDB = require('./seeds');
+//const seedDB = require('./seeds');
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/yelp_camp', { useMongoClient: true });
@@ -21,6 +22,7 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
+app.use(methodOverride('_method'));
 
 app.use(require('express-session')({
   secret: 'traveller',
