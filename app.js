@@ -17,7 +17,7 @@ const indexRoutes = require('./routes/index');
 //const seedDB = require('./seeds');
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/yelp_camp', { useMongoClient: true });
+mongoose.connect('mongodb://localhost/yelp_camp_d', { useMongoClient: true });
 
 const app = express();
 
