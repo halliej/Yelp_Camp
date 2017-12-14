@@ -1,3 +1,4 @@
+/* eslint no-console: 0 */
 const express = require('express');
 const passport = require('passport');
 
@@ -16,11 +17,12 @@ router.get('/register', (req, res) => {
 router.post('/register', (req, res) => {
   User.register(new User({ username: req.body.username }), req.body.password, (err, user) => {
     if (err) {
-      console.log(err);
-      return res.render('register');
+      req.flash('error', err.message);
+      return res.redirect('register');
     }
     passport.authenticate('local')(req, res, () => {
       console.log('registered', user);
+      req.flash('success', `Successfully registered as ${user.username}!`);
       res.redirect('/campgrounds');
     });
   });
@@ -32,7 +34,9 @@ router.get('/login', (req, res) => {
 
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/campgrounds',
-  failureRedirect: '/login'
+  failureRedirect: '/login',
+  successFlash: true,
+  failureFlash: true
 }));
 
 router.get('/logout', (req, res) => {

@@ -1,4 +1,5 @@
 /* eslint no-lonely-if: 0 */
+/* eslint no-console: 0 */
 const express = require('express');
 
 const Campground = require('../models/campground');
@@ -58,6 +59,7 @@ router.get('/:id/edit', middleware.checkCampgroundOwnership, (req, res) => {
 router.put('/:id', middleware.checkCampgroundOwnership, (req, res) => {
   Campground.findByIdAndUpdate(req.params.id, req.body.campground, (err) => {
     if (err) {
+      req.flash('error', 'Campground not found!');
       res.redirect('/campgrounds');
     } else {
       res.redirect(`/campgrounds/${req.params.id}`);
@@ -68,6 +70,7 @@ router.put('/:id', middleware.checkCampgroundOwnership, (req, res) => {
 router.delete('/:id', middleware.checkCampgroundOwnership, (req, res) => {
   Campground.findByIdAndRemove(req.params.id, (err) => {
     if (err) {
+      req.flash('error', 'Campground not found!');
       console.log(err);
       res.redirect('/campgrounds');
     } else {
