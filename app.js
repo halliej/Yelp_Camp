@@ -19,12 +19,7 @@ const indexRoutes = require('./routes/index');
 
 mongoose.Promise = global.Promise;
 
-// mongodb://<dbuser>:<dbpassword>@ds135747.mlab.com:35747/yelpcamphd
-// camper
-// password123
-
-// mongoose.connect('mongodb://localhost/yelp_camp_d', { useMongoClient: true });
-mongoose.connect('mongodb://camper:password123@ds135747.mlab.com:35747/yelpcamphd', { useMongoClient: true });
+mongoose.connect('mongodb://localhost/yelp_camp_d', { useMongoClient: true });
 
 const app = express();
 const port = process.env.PORT || 3000;
